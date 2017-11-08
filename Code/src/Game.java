@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static java.util.Collections.shuffle;
-
+//aushdgipuahgfiaf
 public class Game {
     public static void main(String[] args) {
         /*
