@@ -24,6 +24,6 @@ public class Game {
         }
         shuffle(deck);
         Deck gameDeck = new Deck(deck);
-        
+
     }
 }
