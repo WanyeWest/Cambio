@@ -29,6 +29,6 @@ public class Hand {
     }
     
     public void swap(Player victim, int victimIndex, int playerIndex) {
-    	
+
     }
 }

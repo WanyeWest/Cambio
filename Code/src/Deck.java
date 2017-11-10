@@ -29,14 +29,13 @@ public class Deck {
     	return deck;
     }
 
-	public int get(int i) {
-		return deck.get(i);
-	}
-	
+    public int get(int index) {
+        return deck.get(index);
+    }
+
 	public int draw() {
-		int out = deck.get(0);
-		deck.remove(0);
-		return out;
+		//deck.remove(0);
+		return deck.get(0);
 	}
 }
 

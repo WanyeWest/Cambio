@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static java.util.Collections.shuffle;
 
 public class Game {
     public static void main(String[] args) {
@@ -11,15 +8,16 @@ public class Game {
         Deck shuffledDeck = new Deck(gameDeck.createAndShuffleDeck());
         
         Player pTest = new Player();
-        
 
+        System.out.println(deck.size());
         //testing things
         for(int i = 0; i < deck.size(); i++) {
         	System.out.print(shuffledDeck.get(i) + ", ");
         }
 
+        System.out.println(shuffledDeck.draw());
         for(int i = 0; i < deck.size(); i++) {
         	System.out.print(shuffledDeck.get(i) + ", ");
-        }       
+        }
     }
 }
