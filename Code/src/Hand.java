@@ -1,11 +1,7 @@
 import java.util.ArrayList;
 
 public class Hand {
-    public ArrayList<Integer> hand;
-
-    public Hand(ArrayList<Integer> hand) {
-        this.hand = hand;
-    }
+    public ArrayList<Integer> hand = new ArrayList<Integer>();
 
     public void addCard(int card) {
         hand.add(card);

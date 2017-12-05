@@ -9,13 +9,34 @@ public class Test {
         Player player1 = new Player();
         Player player2 = new Player();
 
-        Player[] players = new Player[2];
+        Player[] players = {player1, player2};
 
-        //loop to deal cards
 
-        //main game loop
-        while(true) {
-
+        //print deck and stuff
+        System.out.println(deck.size());
+        for(int i = 0; i < deck.size(); i++) {
+            System.out.print(shuffledDeck.get(i) + " ");
         }
+
+        System.out.println();
+        //loop to deal cards
+        for(int i = 0; i < players.length; i++) {
+            for(int x = 0; x < 4; x++) {
+                players[i].playerHand.hand.add(shuffledDeck.draw());
+            }
+        }
+
+        for(int i = 0; i < players.length; i++) {
+            System.out.println("Player " + (i + 1) + " hand:");
+            System.out.println(players[i].playerHand.hand);
+        }
+
+        for(int i = 0; i < deck.size(); i++) {
+            System.out.print(shuffledDeck.get(i) + " ");
+        }
+        //main game loop
+//        while(true) {
+//
+//        }
     }
 }

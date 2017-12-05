@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 //each player has a hand
 public class Player {	
-	public Hand playerHand;
+	public Hand playerHand = new Hand();
 	Scanner sc = new Scanner(System.in);
 
 	public void lookSwap(Player victim, int victimIndex, int playerIndex) {

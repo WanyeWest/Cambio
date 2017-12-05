@@ -20,8 +20,5 @@ public class Game {
         	System.out.print(shuffledDeck.get(i) + " ");
         }
 
-        while(true) {
-
-        }
     }
 }
