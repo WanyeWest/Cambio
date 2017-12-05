@@ -21,10 +21,9 @@ public class Hand {
     	burned.add(burnedCard);
     	hand.remove(index);
     	hand.add(index, null);
-    	
     }
 
-    public int sum() {
+    public int getSum() {
     	int sum = 0;
     	for(int i = 0; i < hand.size(); i++) {
     		sum += hand.get(i);
