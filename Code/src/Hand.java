@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Integer> hand;
+    public ArrayList<Integer> hand;
 
     public Hand(ArrayList<Integer> hand) {
         this.hand = hand;
@@ -27,8 +27,6 @@ public class Hand {
     	}
     	return sum;
     }
-    
-    public void swap(Player victim, int victimIndex, int playerIndex) {
 
-    }
+
 }

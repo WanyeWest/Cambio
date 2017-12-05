@@ -12,12 +12,16 @@ public class Game {
         System.out.println(deck.size());
         //testing things
         for(int i = 0; i < deck.size(); i++) {
-        	System.out.print(shuffledDeck.get(i) + ", ");
+        	System.out.print(shuffledDeck.get(i) + " ");
         }
-
+        System.out.println();
         System.out.println(shuffledDeck.draw());
         for(int i = 0; i < deck.size(); i++) {
-        	System.out.print(shuffledDeck.get(i) + ", ");
+        	System.out.print(shuffledDeck.get(i) + " ");
+        }
+
+        while(true) {
+
         }
     }
 }

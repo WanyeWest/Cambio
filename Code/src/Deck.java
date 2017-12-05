@@ -26,6 +26,7 @@ public class Deck {
     		deck.add(i);
     	}
     	shuffle(deck);
+    	deck.add((int)Math.random()*(cards.length - 1), deck.remove(deck.size()-1));
     	return deck;
     }
 
@@ -34,8 +35,7 @@ public class Deck {
     }
 
 	public int draw() {
-		//deck.remove(0);
-		return deck.get(0);
+		return deck.remove(0);
 	}
 }
 
