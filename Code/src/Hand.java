@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Integer> hand;
+    public ArrayList<Integer> hand = new ArrayList<Integer>();
+    public static ArrayList<Integer> burned = new ArrayList<Integer>();
 
     public Hand(ArrayList<Integer> hand) {
         this.hand = hand;
@@ -15,9 +16,12 @@ public class Hand {
         hand.add(index, card);
     }
    
-    public void removeCard(int index) {
+    public void burnCard(int index) {
+    	int burnedCard = hand.get(index);
+    	burned.add(burnedCard);
     	hand.remove(index);
     	hand.add(index, null);
+    	
     }
 
     public int sum() {
@@ -26,9 +30,5 @@ public class Hand {
     		sum += hand.get(i);
     	}
     	return sum;
-    }
-    
-    public void swap(Player victim, int victimIndex, int playerIndex) {
-
     }
 }

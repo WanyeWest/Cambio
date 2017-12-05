@@ -37,5 +37,11 @@ public class Deck {
 		//deck.remove(0);
 		return deck.get(0);
 	}
+	
+	public ArrayList<Integer> shuffleBurned(){
+		for(int i = 0; i < Hand.burned.size(); i++) {
+			
+		}
+	}
 }
 
