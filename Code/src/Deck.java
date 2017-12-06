@@ -15,7 +15,7 @@ public class Deck {
         12,12,12,12,13,13
     };
     
-    private ArrayList<Integer> deck = new ArrayList<Integer>();
+    private static ArrayList<Integer> deck = new ArrayList<Integer>();
     
     public Deck(ArrayList<Integer> cards) {
     	this.deck = cards;
@@ -34,8 +34,14 @@ public class Deck {
         return deck.get(index);
     }
 
-	public int draw() {
+	public static int draw() {
 		return deck.remove(0);
 	}
-}
+	
+	public ArrayList<Integer> shuffleBurned(){
+		shuffle(deck);
+    	deck.add((int)Math.random()*(cards.length - 1), deck.remove(deck.size()-1));
+    	return deck;
+	}
 
+}

@@ -9,7 +9,7 @@ public class Player {
 	public void lookSwap(Player victim, int victimIndex, int playerIndex) {
 		String input;
 		System.out.println("Your card: " + playerHand.hand.get(playerIndex));
-		System.out.println("Their card: " + victim.playerHand.hand.get(victimIndex));
+		System.out.println("Their card: " + victim.playerHand.hand.get(playerIndex));
 		System.out.println("Do you want to swap? (y / n)");
 		input = sc.nextLine();
 		if(input.equalsIgnoreCase("y")) {
@@ -19,5 +19,31 @@ public class Player {
 		} else {
 			System.out.println("Swap cancelled");
 		}
+	}
+	
+	public int getCard(int index) {
+		return playerHand.hand.get(index);
+	}
+	
+	public void blindSwap(Player victim, int victimIndex, int playerIndex) {
+		int victimCard = victim.getCard(victimIndex);
+		playerHand.hand.set(playerIndex, victimCard);
+		System.out.println("Swap successful.");
+	}
+	
+	public int seeCard(int index) {
+		return playerHand.hand.get(index);
+	}
+	
+	public String toString() {
+		String output = "Card Indexes: ";
+		for(int i = 0; i < playerHand.hand.size(); i++) {
+			if(playerHand.hand.get(i) == null) {
+				output += null + ", ";
+			}else {
+				output += i + ", ";
+			}
+		}
+		return output;
 	}
 }

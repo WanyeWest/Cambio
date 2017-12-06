@@ -40,7 +40,7 @@ public class Test {
         player1.lookSwap(player2, 1, 0);
         for(int i = 0; i < players.length; i++) {
             System.out.println("Player " + (i + 1) + " hand:");
-            System.out.println(players[i].playerHand.hand);
+            System.out.println(players[i].toString());
         }
     }
 }
