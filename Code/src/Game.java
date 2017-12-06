@@ -19,6 +19,5 @@ public class Game {
         for(int i = 0; i < deck.size(); i++) {
         	System.out.print(shuffledDeck.get(i) + " ");
         }
-
     }
 }

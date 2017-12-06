@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Hand {
     public ArrayList<Integer> hand = new ArrayList<Integer>();
+    public static ArrayList<Integer> burned = new ArrayList<Integer>();
 
     public void addCard(int card) {
         hand.add(card);
@@ -11,12 +12,15 @@ public class Hand {
         hand.add(index, card);
     }
    
-    public void removeCard(int index) {
+    public void burnCard(int index) {
+    	int burnedCard = hand.get(index);
+    	burned.add(burnedCard);
     	hand.remove(index);
     	hand.add(index, null);
     }
 
-    public int sum() {
+
+    public int getSum() {
     	int sum = 0;
     	for(int i = 0; i < hand.size(); i++) {
     		sum += hand.get(i);

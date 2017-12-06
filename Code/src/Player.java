@@ -20,4 +20,19 @@ public class Player {
 			System.out.println("Swap cancelled");
 		}
 	}
+	
+	public int getCard(int index) {
+		return playerHand.hand.get(index);
+	}
+	
+	public void blindSwap(Player victim, int victimIndex, int playerIndex) {
+		int victimCard = victim.getCard(victimIndex);
+		playerHand.hand.set(playerIndex, victimCard);
+		System.out.println("Swap successful.");
+	}
+	
+	public boolean endTurn(String yn) {
+		
+	}
+
 }

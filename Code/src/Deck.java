@@ -37,5 +37,12 @@ public class Deck {
 	public int draw() {
 		return deck.remove(0);
 	}
+	
+	public ArrayList<Integer> shuffleBurned(){
+		shuffle(deck);
+    	deck.add((int)Math.random()*(cards.length - 1), deck.remove(deck.size()-1));
+    	return deck;
+	}
+
 }
 
