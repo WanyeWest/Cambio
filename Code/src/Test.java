@@ -1,7 +1,10 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         ArrayList<Integer> deck = new ArrayList<Integer>();
         Deck gameDeck = new Deck(deck);
         Deck shuffledDeck = new Deck(gameDeck.createAndShuffleDeck());
@@ -35,12 +38,20 @@ public class Test {
         }
 
         //testing look swap
-        System.out.println("Testing look swap");
+//        System.out.println("Testing look swap");
+//        System.out.println();
+//        player1.lookSwap(player2, 1, 0);
+//        for(int i = 0; i < players.length; i++) {
+//            System.out.println("Player " + (i + 1) + " hand:");
+//            System.out.println(players[i].playerHand.hand);
+//        }
+
         System.out.println();
-        player1.lookSwap(player2, 1, 0);
-        for(int i = 0; i < players.length; i++) {
-            System.out.println("Player " + (i + 1) + " hand:");
-            System.out.println(players[i].playerHand.hand);
-        }
+        System.out.println("Testing see card");
+        System.out.println("which player?");
+        int player = sc.nextInt();
+        System.out.println("what index?");
+        int index = sc.nextInt();
+        System.out.println(players[player-1].playerHand.hand.get(index));
     }
 }

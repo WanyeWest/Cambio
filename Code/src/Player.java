@@ -20,4 +20,8 @@ public class Player {
 			System.out.println("Swap cancelled");
 		}
 	}
+
+	public int seeCard(int index) {
+        return playerHand.hand.get(index);
+    }
 }
