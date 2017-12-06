@@ -11,7 +11,6 @@ public class Test {
 
         Player[] players = {player1, player2};
 
-
         //print deck and stuff
         System.out.println(deck.size());
         for(int i = 0; i < deck.size(); i++) {
@@ -34,9 +33,14 @@ public class Test {
         for(int i = 0; i < deck.size(); i++) {
             System.out.print(shuffledDeck.get(i) + " ");
         }
-        //main game loop
-//        while(true) {
-//
-//        }
+
+        //testing look swap
+        System.out.println("Testing look swap");
+        System.out.println();
+        player1.lookSwap(player2, 1, 0);
+        for(int i = 0; i < players.length; i++) {
+            System.out.println("Player " + (i + 1) + " hand:");
+            System.out.println(players[i].playerHand.hand);
+        }
     }
 }

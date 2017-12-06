@@ -9,7 +9,7 @@ public class Player {
 	public void lookSwap(Player victim, int victimIndex, int playerIndex) {
 		String input;
 		System.out.println("Your card: " + playerHand.hand.get(playerIndex));
-		System.out.println("Their card: " + victim.playerHand.hand.get(playerIndex));
+		System.out.println("Their card: " + victim.playerHand.hand.get(victimIndex));
 		System.out.println("Do you want to swap? (y / n)");
 		input = sc.nextLine();
 		if(input.equalsIgnoreCase("y")) {
