@@ -24,7 +24,8 @@ public class Test {
                 players[i].playerHand.hand.add(shuffledDeck.draw());
             }
         }
-
+        
+        //see cards
         for(int i = 0; i < players.length; i++) {
             System.out.println("Player " + (i + 1) + " hand:");
             System.out.println(players[i].playerHand.hand);

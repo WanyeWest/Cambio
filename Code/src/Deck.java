@@ -1,47 +1,60 @@
 import java.util.ArrayList;
-import static java.util.Collections.shuffle;
+import java.util.Collections;
 
 public class Deck {
-    /*
+	
+	/*
     Array of unshuffled deck
     -1 is red king
     11 is jack
     12 is queen
     13 is black king
      */
-	private final int[] cards = {
+	public static final int[] cards = {
         -1,-1,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,
         6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,11,11,11,11,
         12,12,12,12,13,13
     };
+	
+	public static Deck mainDeck = new Deck(cards);
+	public static Deck burnedDeck = new Deck();
     
-    private static ArrayList<Integer> deck = new ArrayList<Integer>();
+    private ArrayList<Integer> deck;
     
-    public Deck(ArrayList<Integer> cards) {
-    	this.deck = cards;
+    private Deck() {
+    	this.deck = new ArrayList<Integer>();
     }
     
-    public ArrayList<Integer> createAndShuffleDeck() {
-    	for(int i: cards) {
-    		deck.add(i);
+    private Deck(int[] cards) {
+    	this.deck = new ArrayList<Integer>();
+    	for (int card : cards) {
+    		this.deck.add(card);
     	}
-    	shuffle(deck);
-    	deck.add((int)Math.random()*(cards.length - 1), deck.remove(deck.size()-1));
-    	return deck;
+    	this.shuffle();
     }
 
+    public void add(int card) {
+    	this.deck.add(card);
+    }
+    
+    public int getTop() {
+    	return deck.get(deck.size() - 1);
+    }
+    
     public int get(int index) {
         return deck.get(index);
     }
 
-	public static int draw() {
+	public int draw() {
 		return deck.remove(0);
 	}
 	
-	public ArrayList<Integer> shuffleBurned(){
-		shuffle(deck);
-    	deck.add((int)Math.random()*(cards.length - 1), deck.remove(deck.size()-1));
-    	return deck;
+	public int size() {
+		return deck.size();
+	}
+	
+	public void shuffle(){
+		Collections.shuffle(deck);
 	}
 
 }

@@ -1,9 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //each player has a hand
 public class Player {	
 	public Hand playerHand = new Hand();
+	public String name = "Wayne";
 	Scanner sc = new Scanner(System.in);
 
 	public void lookSwap(Player victim, int victimIndex, int playerIndex) {
@@ -19,6 +19,10 @@ public class Player {
 		} else {
 			System.out.println("Swap cancelled");
 		}
+	}
+	
+	public void swap(int playerIndex, int card) {
+		playerHand.hand.set(playerIndex, card);
 	}
 	
 	public int getCard(int index) {
