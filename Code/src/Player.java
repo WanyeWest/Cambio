@@ -22,7 +22,8 @@ public class Player {
 	}
 	
 	public void swap(int playerIndex, int card) {
-		playerHand.hand.set(playerIndex, card);
+		int currentCard = playerHand.hand.set(playerIndex, card);
+		Deck.burnedDeck.add(currentCard);
 	}
 	
 	public int getCard(int index) {

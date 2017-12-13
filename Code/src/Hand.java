@@ -15,8 +15,8 @@ public class Hand {
     	int myBurnedCard = hand.set(index, null);
     	Deck.burnedDeck.add(myBurnedCard);
     }
-    
-    public void burnCard(int index, int replaceCard) {
+
+	public void burnCard(int index, int replaceCard) {
     	int myBurnedCard = hand.set(index, replaceCard);
     	Deck.burnedDeck.add(myBurnedCard);
     }
@@ -24,7 +24,7 @@ public class Hand {
     public void discardCard(int index) {
     	int discardValue = hand.get(index);
     	int topBurned = Deck.burnedDeck.getTop();
-    	
+
     	if (discardValue == topBurned) {
     		burnCard(index);
     	} else {
@@ -36,6 +36,9 @@ public class Hand {
     public int getSum() {
     	int sum = 0;
     	for(int i = 0; i < hand.size(); i++) {
+    		if(hand.get(i) == null) {
+    			hand.set(i, 0);
+			}
     		sum += hand.get(i);
     	}
     	return sum;
