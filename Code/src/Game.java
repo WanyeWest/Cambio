@@ -1,193 +1,210 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+        import java.util.Scanner;
 
 public class Game {
-	private final Scanner sc = new Scanner(System.in);
-	public boolean cambioCalled = false;
-	public Player[] players;
-	public int currentPlayer = 0;
-	public int playerCambio = -12497;
+    private final Scanner sc = new Scanner(System.in);
+    public boolean cambioCalled = false;
+    public Player[] players;
+    public int currentPlayer = 0;
+    public int playerCambio = -12497;
 
-	public void start(Player[] players) {
-		this.players = players;
+    public void start(Player[] players) {
 
-		//create and shuffle full Deck
-		Player pTest = new Player();
+        this.players = players;
 
-		System.out.println(Deck.mainDeck.size());
-		//testing things
-		for(int i = 0; i < Deck.mainDeck.size(); i++) {
-			System.out.print(Deck.mainDeck.get(i) + " ");
-		}
+        System.out.println(Deck.mainDeck.size());
+        for(int i = 0; i < Deck.mainDeck.size(); i++) {
+            System.out.print(Deck.mainDeck.get(i) + " ");
+        }
 
-		System.out.println();
-		System.out.println(Deck.mainDeck.draw());
+        System.out.println();
+        System.out.println(Deck.mainDeck.draw());
 
-		for(int i = 0; i < Deck.mainDeck.size(); i++) {
-			System.out.print(Deck.mainDeck.get(i) + " ");
-		}
+        for(int i = 0; i < Deck.mainDeck.size(); i++) {
+            System.out.print(Deck.mainDeck.get(i) + " ");
+        }
 
-	}
+    }
 
-	public void clearConsole() {
-		for (int i = 0; i < 10; i++) {
-			System.out.println();
-		}
-	}
+    public void clearConsole() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+    }
 
-	public void showComputer() {
-		clearConsole();
+    public void showComputer() {
+        clearConsole();
 
-		System.out.print("Show everyone the computer, then press enter: ");
-		sc.nextLine();
+        System.out.print("Show everyone the computer, then press enter: ");
+        sc.nextLine();
 
-	}
+    }
 
-	public void hideComputer() {
-		clearConsole();
+    public void hideComputer() {
+        clearConsole();
 
-		System.out.print("Hide the computer, then press enter: ");
-		sc.nextLine();
+        System.out.print("Hide the computer, then press enter: ");
+        sc.nextLine();
 
-	}
+    }
 
-	private void nextPlayer() {
-		currentPlayer++;
-		if (currentPlayer >= players.length) {
-			currentPlayer = 0;
-		}
-	}
+    private void nextPlayer() {
+        currentPlayer++;
+        if (currentPlayer >= players.length) {
+            currentPlayer = 0;
+        }
+    }
 
-	public boolean hasPower(int card) {
+    private boolean isLegal(int card) {
+        if (card == Deck.burnedDeck.getTop()) {
+            return true;
+        }
+        return false;
+    }
 
-		ArrayList<Integer> cardsWithPowers = new ArrayList<Integer>();
-		cardsWithPowers.add(13);
-		cardsWithPowers.add(12);
-		cardsWithPowers.add(11);
-		cardsWithPowers.add(10);
-		cardsWithPowers.add(9);
-		cardsWithPowers.add(8);
-		cardsWithPowers.add(7);
+    private void burnOther() {
+        System.out.println("Which player are you? 1, 2, 3, 4");
+        int playerBurn = sc.nextInt() - 1;
+        System.out.println("Which player's card would you like to burn? 1, 2, 3, 4");
+        int victimBurn = sc.nextInt() - 1;
+        System.out.println("Which card would you like to burn? " + players[victimBurn]);
+        int cardBurn = sc.nextInt() - 1;
 
-		if (cardsWithPowers.contains(card)) {
+        if (isLegal(cardBurn)) {
+            System.out.println("Which card would you like to replace the burned card with? " + players[playerBurn]);
+            int cardReplace = sc.nextInt();
+            players[victimBurn].playerHand.burnCard(cardBurn, cardReplace);
+        } else {
+            System.out.println("That was the wrong card. You will receive a penalty.");
+            players[playerBurn].playerHand.addCard(Deck.mainDeck.draw());
+        }
+    }
 
-			return true;
+    public boolean hasPower(int card) {
 
-		} else {
+        ArrayList<Integer> cardsWithPowers = new ArrayList<Integer>();
+        cardsWithPowers.add(13);
+        cardsWithPowers.add(12);
+        cardsWithPowers.add(11);
+        cardsWithPowers.add(10);
+        cardsWithPowers.add(9);
+        cardsWithPowers.add(8);
+        cardsWithPowers.add(7);
 
-			return false;
+        if (cardsWithPowers.contains(card)) {
 
-		}
-	}
+            return true;
 
-	public void activatePower (int card) {
+        } else {
 
-		if (card == 7 || card == 8) {
+            return false;
 
-			System.out.println("You can look at a card! Which card do you want to see? \n" + players[currentPlayer]);
-			int index = sc.nextInt();
-			players[currentPlayer].seeCard(index);
+        }
+    }
 
-		} else if (card == 9 || card == 10) {
+    public void activatePower (int card) {
 
-			System.out.println("You can look at someone else's card! Whose card do you want to see? 1, 2, 3, or 4?");
-			int victim = sc.nextInt() - 1;
-			System.out.println("Which card do you want to see? \n" + players[victim]);
-			int index = sc.nextInt();
-			players[victim].seeCard(index);
+        if (card == 7 || card == 8) {
 
-		} else if (card == 11 || card == 12) {
+            System.out.println("You can look at a card! Which card do you want to see? \n" + players[currentPlayer]);
+            int index = sc.nextInt();
+            players[currentPlayer].seeCard(index);
 
-			System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
-			int victim = sc.nextInt() - 1;
-			System.out.println("Which card do you want to swap? \n" + players[victim]);
-			int index = sc.nextInt();
-			System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
-			int playerIndex = sc.nextInt();
-			players[currentPlayer].blindSwap(players[victim], index, playerIndex);
+        } else if (card == 9 || card == 10) {
 
-		} else {
+            System.out.println("You can look at someone else's card! Whose card do you want to see? 1, 2, 3, or 4?");
+            int victim = sc.nextInt() - 1;
+            System.out.println("Which card do you want to see? \n" + players[victim]);
+            int index = sc.nextInt();
+            players[victim].seeCard(index);
 
-			System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
-			int victim = sc.nextInt() - 1;
-			System.out.println("Which card do you want to swap? \n" + players[victim]);
-			int index = sc.nextInt();
-			System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
-			int playerIndex = sc.nextInt();
-			players[currentPlayer].lookSwap(players[victim], index, playerIndex);
+        } else if (card == 11 || card == 12) {
 
-		}
-	}
+            System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
+            int victim = sc.nextInt() - 1;
+            System.out.println("Which card do you want to swap? \n" + players[victim]);
+            int index = sc.nextInt();
+            System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
+            int playerIndex = sc.nextInt();
+            players[currentPlayer].blindSwap(players[victim], index, playerIndex);
 
-	public void takeTurn(Player player) {
+        } else {
 
-		nextPlayer();
-		showComputer();
+            System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
+            int victim = sc.nextInt() - 1;
+            System.out.println("Which card do you want to swap? \n" + players[victim]);
+            int index = sc.nextInt();
+            System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
+            int playerIndex = sc.nextInt();
+            players[currentPlayer].lookSwap(players[victim], index, playerIndex);
 
-		if (cambioCalled && currentPlayer == playerCambio) {
-			//sum of person called cambio
-			int playerSum = players[playerCambio].playerHand.getSum();
+        }
+    }
 
-			for(int i = 0; i < players.length; i++) {
+    public void takeTurn(Player player) {
 
-				if(i == playerCambio) {
-					i++;
-					if(i > players.length) {
-						break;
-					}
-				}
+        nextPlayer();
+        showComputer();
 
-				int sum = players[i].playerHand.getSum();
+        if (cambioCalled && currentPlayer == playerCambio) {
+            //sum of person called cambio
+            int playerSum = players[playerCambio].playerHand.getSum();
 
-				if (sum < playerSum) {
-					System.out.println("Player " + (i + 1) + " wins!!!!");
-					System.exit(0);
-				} else {
-					System.out.println("Player " + (playerCambio + 1) + "wins!!!!");
-					System.exit(0);
-				}
-			}
-		}
+            for(int i = 0; i < players.length; i++) {
 
-		System.out.println("It's " + player.name + "'s turn.");
-		System.out.print("Do you call cambio (y/n)? ");
-		String cambio = sc.nextLine();
+                if(i == playerCambio) {
+                    i++;
+                    if(i > players.length) {
+                        break;
+                    }
+                }
 
-		if (cambio.equalsIgnoreCase("y")) {
-			cambioCalled = true;
-			playerCambio = currentPlayer;
-			return;
-		}
+                int sum = players[i].playerHand.getSum();
 
-		hideComputer();
-		int newCard = Deck.mainDeck.draw();
-		System.out.print("You drew: " + newCard + ". Do you want to keep this card (y/n)? ");
-		String keep = sc.nextLine();
+                if (sum < playerSum) {
+                    System.out.println("Player " + (i + 1) + " wins!!!!");
+                    System.exit(0);
+                } else {
+                    System.out.println("Player " + (playerCambio + 1) + "wins!!!!");
+                    System.exit(0);
+                }
+            }
+        }
 
-		if (keep.equalsIgnoreCase("y")) {
-			System.out.println("Which card do you want to swap with? \n" + player);
-			String index = sc.nextLine();
-			player.swap(Integer.parseInt(index), newCard);
-		} else {
-			Deck.burnedDeck.add(newCard);
-			if(hasPower(newCard)) {
-				activatePower(newCard);
-			}
-		}
-	}
+        System.out.println("It's " + player.name + "'s turn.");
+        System.out.print("Do you call cambio (y/n)? ");
+        String cambio = sc.nextLine();
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		Player p1 = new Player();
-		Player p2 = new Player();
-		Player p3 = new Player();
-		Player p4 = new Player();
-		Player[] players = {p1, p2, p3, p4};
+        if (cambio.equalsIgnoreCase("y")) {
+            cambioCalled = true;
+            playerCambio = currentPlayer;
+            return;
+        }
 
-		game.start(players);
+        hideComputer();
+        int newCard = Deck.mainDeck.draw();
+        System.out.print("You drew: " + newCard + ". Do you want to keep this card (y/n)? ");
+        String keep = sc.nextLine();
 
-		while(true) {
-			game.takeTurn(players[game.currentPlayer]);
-		}
-	}
+        if (keep.equalsIgnoreCase("y")) {
+            System.out.println("Which card do you want to swap with? \n" + player);
+            String index = sc.nextLine();
+            player.swap(Integer.parseInt(index), newCard);
+        } else {
+            Deck.burnedDeck.add(newCard);
+            if(hasPower(newCard)) {
+                activatePower(newCard);
+            }
+        }
+
+        showComputer();
+
+        System.out.println("The card that was just burned is: " + Deck.burnedDeck.getTop());
+        System.out.println("Does anyone want to burn a card? (y/n)");
+        String burn = sc.nextLine();
+
+        if (burn.equalsIgnoreCase("y")) {
+            burnOther();
+        }
+    }
 }

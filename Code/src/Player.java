@@ -3,8 +3,12 @@ import java.util.Scanner;
 //each player has a hand
 public class Player {	
 	public Hand playerHand = new Hand();
-	public String name = "Wayne";
+	public String name;
 	Scanner sc = new Scanner(System.in);
+
+	public Player(String name) {
+		this.name = name;
+	}
 
 	public void lookSwap(Player victim, int victimIndex, int playerIndex) {
 		String input;
