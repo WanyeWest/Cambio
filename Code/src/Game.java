@@ -12,17 +12,19 @@ public class Game {
 
         this.players = players;
 
-        System.out.println(Deck.mainDeck.size());
-        for(int i = 0; i < Deck.mainDeck.size(); i++) {
-            System.out.print(Deck.mainDeck.get(i) + " ");
+
+        for(int i = 0; i < players.length; i++) {
+            for(int x = 0; x < 4; x++) {
+                players[i].playerHand.hand.add(Deck.mainDeck.draw());
+            }
         }
 
-        System.out.println();
-        System.out.println(Deck.mainDeck.draw());
-
-        for(int i = 0; i < Deck.mainDeck.size(); i++) {
-            System.out.print(Deck.mainDeck.get(i) + " ");
+        for(Player i: players) {
+            System.out.println(i.playerHand.hand);
         }
+
+        Deck.burnedDeck.add(Deck.mainDeck.draw());
+        System.out.println(Deck.burnedDeck.getTop());
 
     }
 
@@ -108,7 +110,7 @@ public class Game {
 
             System.out.println("You can look at a card! Which card do you want to see? \n" + players[currentPlayer]);
             int index = sc.nextInt();
-            players[currentPlayer].seeCard(index);
+            System.out.println(players[currentPlayer].seeCard(index));
 
         } else if (card == 9 || card == 10) {
 
@@ -116,7 +118,7 @@ public class Game {
             int victim = sc.nextInt() - 1;
             System.out.println("Which card do you want to see? \n" + players[victim]);
             int index = sc.nextInt();
-            players[victim].seeCard(index);
+            System.out.println(players[victim].seeCard(index));
 
         } else if (card == 11 || card == 12) {
 
