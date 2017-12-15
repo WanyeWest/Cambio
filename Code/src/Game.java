@@ -8,32 +8,45 @@ public class Game {
     public int currentPlayer = 0;
     public int playerCambio = -12497;
 
+    /**
+     * Method that gets called before the start of the game
+     * deals all of the cards to the players
+     * @param players the players that are playing
+     */
     public void start(Player[] players) {
 
         this.players = players;
 
-
+        //Deal cards
         for(int i = 0; i < players.length; i++) {
             for(int x = 0; x < 4; x++) {
                 players[i].playerHand.hand.add(Deck.mainDeck.draw());
             }
         }
 
-        for(Player i: players) {
-            System.out.println(i.playerHand.hand);
+        //prints out all the player's hands for testing
+        for(int i = 0; i < players.length; i++) {
+            System.out.println("Player " + (i + 1) + " cards: " + players[i].playerHand.hand);
         }
 
+        //the initial burn draw thing
         Deck.burnedDeck.add(Deck.mainDeck.draw());
         System.out.println(Deck.burnedDeck.getTop());
 
     }
 
+    /**
+     * Method that "clears" the console by adding a lot of lines
+     */
     public void clearConsole() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             System.out.println();
         }
     }
 
+    /**
+     * Method that tells the player to show the computer to everyone
+     */
     public void showComputer() {
         clearConsole();
 
@@ -42,6 +55,10 @@ public class Game {
 
     }
 
+    /**
+     * Method that tells the player to hide the computer so that
+     * people don't see what they are doing
+     */
     public void hideComputer() {
         clearConsole();
 
@@ -50,6 +67,9 @@ public class Game {
 
     }
 
+    /**
+     * Method that goes increments the current player
+     */
     private void nextPlayer() {
         currentPlayer++;
         if (currentPlayer >= players.length) {
@@ -57,6 +77,11 @@ public class Game {
         }
     }
 
+    /**
+     * Method to check if a burn is legal
+     * @param card the card that you are checking
+     * @return true (the move is legal) or false (the move isn't legal)
+     */
     private boolean isLegal(int card) {
         if (card == Deck.burnedDeck.getTop()) {
             return true;
@@ -64,15 +89,19 @@ public class Game {
         return false;
     }
 
+    /**
+     * Method that lets person burn a card
+     */
     private void burnOther() {
+        //choose the player that burns, the player that will lose the card, and index of the card
         System.out.println("Which player are you? 1, 2, 3, 4");
         int playerBurn = sc.nextInt() - 1;
         System.out.println("Which player's card would you like to burn? 1, 2, 3, 4");
         int victimBurn = sc.nextInt() - 1;
         System.out.println("Which card would you like to burn? " + players[victimBurn]);
-        int cardBurn = sc.nextInt() - 1;
+        int cardBurn = sc.nextInt();
 
-        if (isLegal(cardBurn)) {
+        if (isLegal(players[victimBurn].playerHand.hand.get(cardBurn))) {
             System.out.println("Which card would you like to replace the burned card with? " + players[playerBurn]);
             int cardReplace = sc.nextInt();
             players[victimBurn].playerHand.burnCard(cardBurn, cardReplace);
@@ -82,8 +111,14 @@ public class Game {
         }
     }
 
+    /**
+     * Method that checks if a card has a power
+     * @param card the card that is being checked
+     * @return true (has a power) false (doesn't have a power)
+     */
     public boolean hasPower(int card) {
 
+        //list of cards with powers
         ArrayList<Integer> cardsWithPowers = new ArrayList<Integer>();
         cardsWithPowers.add(13);
         cardsWithPowers.add(12);
@@ -104,6 +139,10 @@ public class Game {
         }
     }
 
+    /**
+     * Activates a card's power if it has one
+     * @param card the card that will activate
+     */
     public void activatePower (int card) {
 
         if (card == 7 || card == 8) {
@@ -132,7 +171,7 @@ public class Game {
 
         } else {
 
-            System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
+            System.out.println("You can look swap! Who do you want to swap with? 1, 2, 3, 4");
             int victim = sc.nextInt() - 1;
             System.out.println("Which card do you want to swap? \n" + players[victim]);
             int index = sc.nextInt();
@@ -143,11 +182,16 @@ public class Game {
         }
     }
 
+    /**
+     * The important method where all the stuff gets done
+     * @param player the current player
+     */
     public void takeTurn(Player player) {
 
         nextPlayer();
         showComputer();
 
+        //Checks if cambio has been called and if it is the callers turn
         if (cambioCalled && currentPlayer == playerCambio) {
             //sum of person called cambio
             int playerSum = players[playerCambio].playerHand.getSum();
