@@ -1,12 +1,13 @@
 import java.util.ArrayList;
-        import java.util.Scanner;
+import java.util.Scanner;
 
 public class Game {
     private final Scanner sc = new Scanner(System.in);
-    public boolean cambioCalled = false;
-    public Player[] players;
+    private boolean cambioCalled = false;
+    private Player[] players;
+    private int playerCambio = -12497;
     public int currentPlayer = 0;
-    public int playerCambio = -12497;
+
 
     /**
      * Method that gets called before the start of the game
@@ -29,10 +30,44 @@ public class Game {
             System.out.println("Player " + (i + 1) + " cards: " + players[i].playerHand.hand);
         }
 
+        clearConsole();
+
+        //prints each the bottom 2 cards in a player's hand
+        for(int i = 0; i < players.length; i++) {
+            hideComputer();
+            System.out.println("Player " + (i + 1) + " cards: \n" +
+                    "index 0: " + players[i].playerHand.hand.get(0) + "\n" +
+                    "index 1: " + players[i].playerHand.hand.get(1));
+            if(i < players.length - 1) {
+                System.out.println("When you are ready, press enter and pass computer to the next player");
+                sc.nextLine();
+            } else {
+                System.out.println("Everyone has seen their cards");
+            }
+        }
+
+        clearConsole();
+
         //the initial burn draw thing
         Deck.burnedDeck.add(Deck.mainDeck.draw());
-        System.out.println(Deck.burnedDeck.getTop());
+        System.out.println("The initial card is: " + Deck.burnedDeck.getTop());
 
+        System.out.println("Press enter once everyone has seen this card");
+        sc.nextLine();
+        System.out.println("Does anyone want to burn a card? (y/n)");
+        String burn = sc.nextLine();
+
+        if (burn.equalsIgnoreCase("y")) {
+            System.out.println("Which player would like to burn a card? 1, 2, 3, 4");
+            int playerBurn = sc.nextInt() - 1;
+            System.out.println("Are you burning one of your own cards? (y/n)");
+            String burnSelf = sc.next();
+            if (burnSelf.equalsIgnoreCase("y")) {
+                burnSelf(playerBurn);
+            } else {
+                burnOther(playerBurn);
+            }
+        }
     }
 
     /**
@@ -79,7 +114,8 @@ public class Game {
 
     /**
      * Method to check if a burn is legal
-     * @param card the card that you are checking
+     * @param card the card that you are checking; compares it to
+     *             the top of the burn deck
      * @return true (the move is legal) or false (the move isn't legal)
      */
     private boolean isLegal(int card) {
@@ -91,23 +127,41 @@ public class Game {
 
     /**
      * Method that lets person burn a card
+     * @param burner the player that is doing the burning
      */
-    private void burnOther() {
-        //choose the player that burns, the player that will lose the card, and index of the card
-        System.out.println("Which player are you? 1, 2, 3, 4");
-        int playerBurn = sc.nextInt() - 1;
+    private void burnOther(int burner) {
+        //choose the player the player that will lose the card and index of the card
         System.out.println("Which player's card would you like to burn? 1, 2, 3, 4");
         int victimBurn = sc.nextInt() - 1;
         System.out.println("Which card would you like to burn? " + players[victimBurn]);
         int cardBurn = sc.nextInt();
 
+        //checks if the burn is legal
         if (isLegal(players[victimBurn].playerHand.hand.get(cardBurn))) {
-            System.out.println("Which card would you like to replace the burned card with? " + players[playerBurn]);
+            System.out.println("Which card would you like to replace the burned card with? " + players[burner]);
             int cardReplace = sc.nextInt();
             players[victimBurn].playerHand.burnCard(cardBurn, cardReplace);
         } else {
             System.out.println("That was the wrong card. You will receive a penalty.");
-            players[playerBurn].playerHand.addCard(Deck.mainDeck.draw());
+            players[burner].playerHand.addCard(Deck.mainDeck.draw());
+        }
+    }
+
+    /**
+     * Method to burn your own card
+     * @param burner the player that is doing the burning
+     */
+    private void burnSelf(int burner) {
+        //choose which card gets burned
+        System.out.println("Which card would you like to burn? Options: " + players[burner]);
+        int cardBurn = sc.nextInt();
+
+        //checks if the burn is legal
+        if (isLegal(players[burner].playerHand.hand.get(cardBurn))) {
+            System.out.println("You have burned a card");
+        } else {
+            System.out.println("That was the wrong card. You will receive a penalty.");
+            players[burner].playerHand.addCard(Deck.mainDeck.draw());
         }
     }
 
@@ -129,13 +183,9 @@ public class Game {
         cardsWithPowers.add(7);
 
         if (cardsWithPowers.contains(card)) {
-
             return true;
-
         } else {
-
             return false;
-
         }
     }
 
@@ -145,22 +195,26 @@ public class Game {
      */
     public void activatePower (int card) {
 
+
         if (card == 7 || card == 8) {
 
+            //look at your own card
             System.out.println("You can look at a card! Which card do you want to see? \n" + players[currentPlayer]);
             int index = sc.nextInt();
-            System.out.println(players[currentPlayer].seeCard(index));
+            System.out.println("The card in index " + index + " of your hand is: " +players[currentPlayer].seeCard(index));
 
         } else if (card == 9 || card == 10) {
 
+            //look at someone else's card
             System.out.println("You can look at someone else's card! Whose card do you want to see? 1, 2, 3, or 4?");
             int victim = sc.nextInt() - 1;
             System.out.println("Which card do you want to see? \n" + players[victim]);
             int index = sc.nextInt();
-            System.out.println(players[victim].seeCard(index));
+            System.out.println("The card in index " + index + "of their hand is: " + players[victim].seeCard(index));
 
         } else if (card == 11 || card == 12) {
 
+            //blind swap
             System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
             int victim = sc.nextInt() - 1;
             System.out.println("Which card do you want to swap? \n" + players[victim]);
@@ -171,6 +225,7 @@ public class Game {
 
         } else {
 
+            //look swap
             System.out.println("You can look swap! Who do you want to swap with? 1, 2, 3, 4");
             int victim = sc.nextInt() - 1;
             System.out.println("Which card do you want to swap? \n" + players[victim]);
@@ -205,6 +260,7 @@ public class Game {
                     }
                 }
 
+                //gets the sum of the player at index i
                 int sum = players[i].playerHand.getSum();
 
                 if (sum < playerSum) {
@@ -250,7 +306,15 @@ public class Game {
         String burn = sc.nextLine();
 
         if (burn.equalsIgnoreCase("y")) {
-            burnOther();
+            System.out.println("Which player would like to burn a card? 1, 2, 3, 4");
+            int playerBurn = sc.nextInt() - 1;
+            System.out.println("Are you burning one of your own cards? (y/n)");
+            String burnSelf = sc.nextLine();
+            if (burnSelf.equalsIgnoreCase("y")) {
+                burnSelf(playerBurn);
+            } else {
+                burnOther(playerBurn);
+            }
         }
     }
 }

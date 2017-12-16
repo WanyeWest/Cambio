@@ -39,6 +39,9 @@ public class Hand {
     		if(hand.get(i) == null) {
     			hand.set(i, 0);
 			}
+			if(hand.get(i) == 13 || hand.get(i) == 12 || hand.get(i) == 11) {
+    		    hand.set(i, 10);
+            }
     		sum += hand.get(i);
     	}
     	return sum;
