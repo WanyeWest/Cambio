@@ -265,9 +265,18 @@ public class Game {
 
                 if (sum < playerSum) {
                     System.out.println("Player " + (i + 1) + " wins!!!!");
+                    System.out.println("Cards:");
+                    for(int z = 0; z < players.length; z++) {
+                        System.out.println("Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
+                    }
                     System.exit(0);
+
                 } else {
-                    System.out.println("Player " + (playerCambio + 1) + "wins!!!!");
+                    System.out.println("Player " + (playerCambio + 1) + " wins!!!!");
+                    System.out.println("Cards:");
+                    for(int z = 0; z < players.length; z++) {
+                        System.out.println("Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
+                    }
                     System.exit(0);
                 }
             }
