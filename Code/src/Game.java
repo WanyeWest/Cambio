@@ -74,7 +74,7 @@ public class Game {
      * Method that "clears" the console by adding a lot of lines
      */
     public void clearConsole() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 30; i++) {
             System.out.println();
         }
     }
