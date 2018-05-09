@@ -6,6 +6,10 @@ public abstract class Card {
     private Scanner sc = new Scanner(System.in);
     static int value;
 
+    public Card(int value) {
+        this.value = value;
+    }
+
     /**
      * The method is called whenever you draw the card
      * Asks the player if they want to keep the card
