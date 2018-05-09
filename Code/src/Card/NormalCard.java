@@ -1,4 +1,4 @@
 package Card;
 
-public class NormalCard {
+public class NormalCard extends Card {
 }
