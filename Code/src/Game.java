@@ -119,10 +119,7 @@ public class Game {
      * @return true (the move is legal) or false (the move isn't legal)
      */
     private boolean isLegal(int card) {
-        if (card == Deck.burnedDeck.getTop()) {
-            return true;
-        }
-        return false;
+        return card == Deck.burnedDeck.getTop();
     }
 
     /**
@@ -182,11 +179,7 @@ public class Game {
         cardsWithPowers.add(8);
         cardsWithPowers.add(7);
 
-        if (cardsWithPowers.contains(card)) {
-            return true;
-        } else {
-            return false;
-        }
+        return cardsWithPowers.contains(card);
     }
 
     /**

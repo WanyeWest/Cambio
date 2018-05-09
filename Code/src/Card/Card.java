@@ -3,7 +3,7 @@ package Card;
 import java.util.Scanner;
 
 public abstract class Card {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     static int value;
 
     /**
@@ -24,7 +24,7 @@ public abstract class Card {
     /**
      * @return the value of the card
      */
-    public static int getValue() {
+    private static int getValue() {
         return value;
     }
 
