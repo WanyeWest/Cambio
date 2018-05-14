@@ -1,13 +1,15 @@
 package card;
 
-public class LookSelfCard extends Card implements PowerBoi {
+import game.Player;
+
+public class LookSelfCard extends Card implements PowerBoiSelf {
 
     public LookSelfCard(int value, String name) {
         super(value, name);
     }
 
     @Override
-    public void power() {
+    public void power(Player currentPlayer, int index) {
 
     }
 
@@ -15,4 +17,5 @@ public class LookSelfCard extends Card implements PowerBoi {
     public String toString() {
         return super.toString();
     }
+
 }

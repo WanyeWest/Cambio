@@ -1,6 +1,6 @@
 package card;
 
-public class LookOtherCard extends Card implements PowerBoi {
+public class LookOtherCard extends Card implements PowerBoiOther {
 
     public LookOtherCard(int value, String name) {
         super(value, name);

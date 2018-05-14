@@ -1,6 +1,6 @@
 package card;
 
-public class BlindSwapCard extends Card implements PowerBoi{
+public class BlindSwapCard extends Card implements PowerBoiOther {
 
     public BlindSwapCard(int value, String name) {
         super(value, name);
