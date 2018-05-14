@@ -1,3 +1,5 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,7 +29,7 @@ public class Game {
 
         //prints out all the player's hands for testing
         for(int i = 0; i < players.length; i++) {
-            System.out.println("Player " + (i + 1) + " cards: " + players[i].playerHand.hand);
+            System.out.println("game.Player " + (i + 1) + " cards: " + players[i].playerHand.hand);
         }
 
         clearConsole();
@@ -35,7 +37,7 @@ public class Game {
         //prints each the bottom 2 cards in a player's hand
         for(int i = 0; i < players.length; i++) {
             hideComputer();
-            System.out.println("Player " + (i + 1) + " cards: \n" +
+            System.out.println("game.Player " + (i + 1) + " cards: \n" +
                     "index 0: " + players[i].playerHand.hand.get(0) + "\n" +
                     "index 1: " + players[i].playerHand.hand.get(1));
             if(i < players.length - 1) {
@@ -257,18 +259,18 @@ public class Game {
                 int sum = players[i].playerHand.getSum();
 
                 if (sum < playerSum) {
-                    System.out.println("Player " + (i + 1) + " wins!!!!");
+                    System.out.println("game.Player " + (i + 1) + " wins!!!!");
                     System.out.println("Cards:");
                     for(int z = 0; z < players.length; z++) {
-                        System.out.println("Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
+                        System.out.println("game.Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
                     }
                     System.exit(0);
 
                 } else {
-                    System.out.println("Player " + (playerCambio + 1) + " wins!!!!");
+                    System.out.println("game.Player " + (playerCambio + 1) + " wins!!!!");
                     System.out.println("Cards:");
                     for(int z = 0; z < players.length; z++) {
-                        System.out.println("Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
+                        System.out.println("game.Player " + (z + 1) + " cards: " + players[z].playerHand.hand);
                     }
                     System.exit(0);
                 }

@@ -1,2 +1,2 @@
-"Sick Cambio Game For APCS"
+"Sick Cambio game.game For APCS"
 "by: Wayne Flores and Grace Chen"
