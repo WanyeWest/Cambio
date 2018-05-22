@@ -2,6 +2,9 @@ package card;
 
 import game.Player;
 
-public interface PowerBoiOther {
+/**
+ * interface for cards with powers that target other players
+ */
+public interface PowerBoiDouble {
     void power(Player current, Player victim, int indexSelf, int indexVictim);
 }

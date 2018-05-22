@@ -5,7 +5,7 @@ import game.Player;
 import game.Deck;
 
 public abstract class Card {
-    private Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
     public int value;
     public String name;
 
@@ -27,8 +27,11 @@ public abstract class Card {
             int cardIndex = sc.nextInt();
             Card temp = player.playerHand.hand.get(cardIndex);
             Deck.burnedDeck.add(temp);
-            player.playerHand.hand.set(cardIndex, temp);
-
+            player.playerHand.hand.set(cardIndex, this);
+            System.out.println("The card is: " + temp);
+        } else if (sc.nextLine().equalsIgnoreCase("n")) {
+            Deck.burnedDeck.add(this);
+            System.out.println("The card is: " + this);
         }
     }
 
@@ -36,6 +39,11 @@ public abstract class Card {
         return value;
     }
 
+    /**
+     * CompareTo method
+     * @param card card to compare with
+     * @return -1 if value is less, 0 if equal, 1 if more
+     */
     public int compareTo(Card card) {
         if (value > card.getValue()) {
             return 1;
@@ -44,6 +52,16 @@ public abstract class Card {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Checks if the card is equal to another card
+     * @param card the card to be compared to
+     * @return true if the obj is equal false otherwise
+     */
+    @Override
+    public boolean equals(Card card) {
+        return super.equals(card);
     }
 
     public String toString() {

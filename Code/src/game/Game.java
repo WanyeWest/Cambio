@@ -6,10 +6,9 @@ import java.util.Scanner;
 public class Game {
     private final Scanner sc = new Scanner(System.in);
     private boolean cambioCalled = false;
-    private Player[] players;
     private int playerCambio = -12497;
-    public int currentPlayer = 0;
-
+    static int currentPlayer = 0;
+    static Player[] players;
 
     /**
      * Method that gets called before the start of the game
@@ -124,45 +123,45 @@ public class Game {
         return card == Deck.burnedDeck.getTop();
     }
 
-    /**
-     * Method that lets person burn a card
-     * @param burner the player that is doing the burning
-     */
-    private void burnOther(int burner) {
-        //choose the player the player that will lose the card and index of the card
-        System.out.println("Which player's card would you like to burn? 1, 2, 3, 4");
-        int victimBurn = sc.nextInt() - 1;
-        System.out.println("Which card would you like to burn? " + players[victimBurn]);
-        int cardBurn = sc.nextInt();
-
-        //checks if the burn is legal
-        if (isLegal(players[victimBurn].playerHand.hand.get(cardBurn))) {
-            System.out.println("Which card would you like to replace the burned card with? " + players[burner]);
-            int cardReplace = sc.nextInt();
-            players[victimBurn].playerHand.burnCard(cardBurn, cardReplace);
-        } else {
-            System.out.println("That was the wrong card. You will receive a penalty.");
-            players[burner].playerHand.addCard(Deck.mainDeck.draw());
-        }
-    }
-
-    /**
-     * Method to burn your own card
-     * @param burner the player that is doing the burning
-     */
-    private void burnSelf(int burner) {
-        //choose which card gets burned
-        System.out.println("Which card would you like to burn? Options: " + players[burner]);
-        int cardBurn = sc.nextInt();
-
-        //checks if the burn is legal
-        if (isLegal(players[burner].playerHand.hand.get(cardBurn))) {
-            System.out.println("You have burned a card");
-        } else {
-            System.out.println("That was the wrong card. You will receive a penalty.");
-            players[burner].playerHand.addCard(Deck.mainDeck.draw());
-        }
-    }
+//    /**
+//     * Method that lets person burn a card
+//     * @param burner the player that is doing the burning
+//     */
+//    private void burnOther(int burner) {
+//        //choose the player the player that will lose the card and index of the card
+//        System.out.println("Which player's card would you like to burn? 1, 2, 3, 4");
+//        int victimBurn = sc.nextInt() - 1;
+//        System.out.println("Which card would you like to burn? " + players[victimBurn]);
+//        int cardBurn = sc.nextInt();
+//
+//        //checks if the burn is legal
+//        if (isLegal(players[victimBurn].playerHand.hand.get(cardBurn))) {
+//            System.out.println("Which card would you like to replace the burned card with? " + players[burner]);
+//            int cardReplace = sc.nextInt();
+//            players[victimBurn].playerHand.burnCard(cardBurn, cardReplace);
+//        } else {
+//            System.out.println("That was the wrong card. You will receive a penalty.");
+//            players[burner].playerHand.addCard(Deck.mainDeck.draw());
+//        }
+//    }
+//
+//    /**
+//     * Method to burn your own card
+//     * @param burner the player that is doing the burning
+//     */
+//    private void burnSelf(int burner) {
+//        //choose which card gets burned
+//        System.out.println("Which card would you like to burn? Options: " + players[burner]);
+//        int cardBurn = sc.nextInt();
+//
+//        //checks if the burn is legal
+//        if (isLegal(players[burner].playerHand.hand.get(cardBurn))) {
+//            System.out.println("You have burned a card");
+//        } else {
+//            System.out.println("That was the wrong card. You will receive a penalty.");
+//            players[burner].playerHand.addCard(Deck.mainDeck.draw());
+//        }
+//    }
 
     /**
      * Method that checks if a card has a power
