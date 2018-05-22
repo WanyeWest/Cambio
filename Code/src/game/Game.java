@@ -7,8 +7,8 @@ public class Game {
     private final Scanner sc = new Scanner(System.in);
     private boolean cambioCalled = false;
     private int playerCambio = -12497;
-    static int currentPlayer = 0;
-    static Player[] players;
+    public static int currentPlayer = 0;
+    public static Player[] players = new Player[4];
 
     /**
      * Method that gets called before the start of the game
@@ -111,16 +111,6 @@ public class Game {
         if (currentPlayer >= players.length) {
             currentPlayer = 0;
         }
-    }
-
-    /**
-     * Method to check if a burn is legal
-     * @param card the card that you are checking; compares it to
-     *             the top of the burn deck
-     * @return true (the move is legal) or false (the move isn't legal)
-     */
-    private boolean isLegal(int card) {
-        return card == Deck.burnedDeck.getTop();
     }
 
 //    /**

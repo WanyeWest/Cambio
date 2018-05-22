@@ -1,8 +1,9 @@
 package card;
 
 import java.util.Scanner;
-import game.Player;
+import static game.Player.askBurn;
 import game.Deck;
+import game.Player;
 
 public abstract class Card {
     public static Scanner sc = new Scanner(System.in);
@@ -18,6 +19,10 @@ public abstract class Card {
         this.name = name;
     }
 
+    /**
+     * This is called whenever a card is drawn
+     * @param player the player that drew the card
+     */
     public void onDraw(Player player) {
         System.out.println(this);
         System.out.println("Do you want to keep this card? (y/n)");
@@ -32,6 +37,7 @@ public abstract class Card {
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card is: " + this);
+            askBurn();
         }
     }
 
@@ -59,7 +65,6 @@ public abstract class Card {
      * @param card the card to be compared to
      * @return true if the obj is equal false otherwise
      */
-    @Override
     public boolean equals(Card card) {
         return super.equals(card);
     }
