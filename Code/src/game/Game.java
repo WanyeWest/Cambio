@@ -22,7 +22,7 @@ public class Game {
         //Deal cards
         for(int i = 0; i < players.length; i++) {
             for(int x = 0; x < 4; x++) {
-                players[i].playerHand.hand.add(Deck.mainDeck.draw());
+                players[i].playerHand.hand.addCard(Deck.mainDeck.draw());
             }
         }
 
@@ -64,7 +64,7 @@ public class Game {
             System.out.println("Are you burning one of your own cards? (y/n)");
             String burnSelf = sc.next();
             if (burnSelf.equalsIgnoreCase("y")) {
-                burnSelf(playerBurn);
+                game.Player.burnSelf(playerBurn);
             } else {
                 burnOther(playerBurn);
             }
@@ -152,74 +152,6 @@ public class Game {
 //            players[burner].playerHand.addCard(Deck.mainDeck.draw());
 //        }
 //    }
-
-    /**
-     * Method that checks if a card has a power
-     * @param card the card that is being checked
-     * @return true (has a power) false (doesn't have a power)
-     */
-    public boolean hasPower(int card) {
-
-        //list of cards with powers
-        ArrayList<Integer> cardsWithPowers = new ArrayList<Integer>();
-        cardsWithPowers.add(13);
-        cardsWithPowers.add(12);
-        cardsWithPowers.add(11);
-        cardsWithPowers.add(10);
-        cardsWithPowers.add(9);
-        cardsWithPowers.add(8);
-        cardsWithPowers.add(7);
-
-        return cardsWithPowers.contains(card);
-    }
-
-    /**
-     * Activates a card's power if it has one
-     * @param card the card that will activate
-     */
-    public void activatePower (int card) {
-
-
-        if (card == 7 || card == 8) {
-
-            //look at your own card
-            System.out.println("You can look at a card! Which card do you want to see? \n" + players[currentPlayer]);
-            int index = sc.nextInt();
-            System.out.println("The card in index " + index + " of your hand is: " +players[currentPlayer].seeCard(index));
-
-        } else if (card == 9 || card == 10) {
-
-            //look at someone else's card
-            System.out.println("You can look at someone else's card! Whose card do you want to see? 1, 2, 3, or 4?");
-            int victim = sc.nextInt() - 1;
-            System.out.println("Which card do you want to see? \n" + players[victim]);
-            int index = sc.nextInt();
-            System.out.println("The card in index " + index + "of their hand is: " + players[victim].seeCard(index));
-
-        } else if (card == 11 || card == 12) {
-
-            //blind swap
-            System.out.println("You can blind swap! Who do you want to swap with? 1, 2, 3, 4");
-            int victim = sc.nextInt() - 1;
-            System.out.println("Which card do you want to swap? \n" + players[victim]);
-            int index = sc.nextInt();
-            System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
-            int playerIndex = sc.nextInt();
-            players[currentPlayer].blindSwap(players[victim], index, playerIndex);
-
-        } else {
-
-            //look swap
-            System.out.println("You can look swap! Who do you want to swap with? 1, 2, 3, 4");
-            int victim = sc.nextInt() - 1;
-            System.out.println("Which card do you want to swap? \n" + players[victim]);
-            int index = sc.nextInt();
-            System.out.println("Which of your cards do you want to swap? \n" + players[currentPlayer]);
-            int playerIndex = sc.nextInt();
-            players[currentPlayer].lookSwap(players[victim], index, playerIndex);
-
-        }
-    }
 
     /**
      * The important method where all the stuff gets done

@@ -109,4 +109,41 @@ public class Deck {
 		Collections.shuffle(deck);
 	}
 
+
+    /**
+     * returns pivot for sorting
+     */
+	public int partition (Card[] arr, int low, int high) {
+		// pivot (Element to be placed at right position)
+		int pivot = arr[high].getVal();
+		int i = (low - 1);  // Index of smaller element
+
+		for (int j = low; j <= high- 1; j++) {
+			// If current element is smaller than or
+			// equal to pivot
+			if (arr[j].getVal() <= pivot) {
+				i++;    // increment index of smaller element
+        /*int placeHolder = arr[i];
+        int pH = arr[j];
+        arr[i] = pH;
+        arr[j] = placeHolder;*/
+				Collections.swap(arr, i, j);
+			}
+		}
+		Collections.swap(arr, i + 1, high);
+		return (i + 1);
+	}
+
+    /**
+     * provides range for sorting
+     */
+	public void reset(Card[] arr, int low, int high) {
+		if (low < high) {
+            /* pi is partitioning index, arr[pi] is now
+               at right place */
+			int pi = partition(arr, low, high);
+			reset(arr, low, pi - 1);  // Before pi
+			reset(arr, pi + 1, high); // After pi
+		}
+	}
 }

@@ -21,8 +21,8 @@ public class BlindSwapCard extends Card implements PowerBoiDouble {
             int cardIndex = sc.nextInt();
             Card temp = player.playerHand.hand.get(cardIndex);
             Deck.burnedDeck.add(temp);
-            player.playerHand.hand.set(cardIndex, this);
-            System.out.println("The card is: " + temp);
+            player.playerHand.burnCard(cardIndex, this);
+            System.out.println("The card burned is: " + temp);
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card is: " + this);

@@ -20,6 +20,11 @@ public abstract class Card {
     }
 
     /**
+     * Gets value of cards
+     */
+    public int getVal(){ return value; }
+
+    /**
      * This is called whenever a card is drawn
      * @param player the player that drew the card
      */
@@ -32,17 +37,13 @@ public abstract class Card {
             int cardIndex = sc.nextInt();
             Card temp = player.playerHand.hand.get(cardIndex);
             Deck.burnedDeck.add(temp);
-            player.playerHand.hand.set(cardIndex, this);
-            System.out.println("The card is: " + temp);
+            player.playerHand.burnCard(cardIndex, this);
+            System.out.println("The card burned is: " + temp);
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
-            System.out.println("The card is: " + this);
+            System.out.println("The card burned is: " + this);
             askBurn();
         }
-    }
-
-    public int getValue() {
-        return value;
     }
 
     /**
