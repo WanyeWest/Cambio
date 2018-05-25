@@ -55,7 +55,7 @@ public class Hand {
 			if(hand.get(i) == null) {
 				sum += 0;
 			} else {
-				sum += hand.get(i).getValue();
+				sum += hand.get(i).getVal();
 			}
 		}
 		return sum;
@@ -85,11 +85,6 @@ public class Hand {
 	 */
 	public String toString() {
 		String out = new String();
-		if(hand.size() < 4) {
-			out += "Main hand:\n";
-		} else {
-			out += "Penalty card(s):\n";
-		}
 		for(int i = 0; i < hand.size(); i++) {
 
 			if(hand.get(i) == null) {

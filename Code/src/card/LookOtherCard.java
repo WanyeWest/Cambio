@@ -4,7 +4,6 @@ import game.Deck;
 import game.Game;
 import game.Player;
 
-import static game.Player.askBurn;
 
 public class LookOtherCard extends Card implements PowerBoiSingle {
 
@@ -27,7 +26,7 @@ public class LookOtherCard extends Card implements PowerBoiSingle {
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card is: " + this);
-            askBurn();
+            gameI.askBurn();
             System.out.println("You can look another person's!");
             System.out.println("Which player do you want to look at? 1,2,3,4");
             Player victim = Game.players[sc.nextInt() - 1];

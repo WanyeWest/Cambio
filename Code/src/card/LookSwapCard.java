@@ -3,8 +3,6 @@ package card;
 import game.Deck;
 import game.Player;
 
-import static game.Player.askBurn;
-
 public class LookSwapCard extends Card implements PowerBoiDouble {
 
     public LookSwapCard(int value, String name) {
@@ -26,7 +24,7 @@ public class LookSwapCard extends Card implements PowerBoiDouble {
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card is: " + this);
-            askBurn();
+            gameI.askBurn();
             System.out.println("You can look swap!");
             System.out.println("Which player do you want to swap with? (1,2,3,4)");
             Player victim = game.Game.players[sc.nextInt() - 1];

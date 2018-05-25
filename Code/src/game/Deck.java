@@ -40,7 +40,7 @@ public class Deck {
 	//burnedDeck is the deck that people discard cards into
 	public static Deck burnedDeck = new Deck();
 
-	private ArrayList<Card> deck;
+	public ArrayList<Card> deck;
 
 	/**
 	 * Deck constructor
@@ -53,7 +53,7 @@ public class Deck {
 	 * Deck constructor
 	 * @param cards list of cards that go in the deck
 	 */
-	private Deck(Card[] cards) {
+	Deck(Card[] cards) {
 		this.deck = new ArrayList<Card>();
 		for (Card card : cards) {
 			this.deck.add(card);
@@ -113,37 +113,49 @@ public class Deck {
     /**
      * returns pivot for sorting
      */
-	public int partition (Card[] arr, int low, int high) {
+	public int partition (int low, int high) {
 		// pivot (Element to be placed at right position)
-		int pivot = arr[high].getVal();
-		int i = (low - 1);  // Index of smaller element
+		int pivot = deck.get(high - 1).getVal();
+		int i = low;  // Index of smaller element
 
-		for (int j = low; j <= high- 1; j++) {
+		for (int j = low; j < high; j++) {
 			// If current element is smaller than or
 			// equal to pivot
-			if (arr[j].getVal() <= pivot) {
-				i++;    // increment index of smaller element
-        /*int placeHolder = arr[i];
-        int pH = arr[j];
-        arr[i] = pH;
-        arr[j] = placeHolder;*/
-				Collections.swap(arr, i, j);
+			if (deck.get(j).getVal() <= pivot) {
+				//i++;    // increment index of smaller element
+
+				Card placeHolder = deck.get(i);
+				deck.set(i, deck.get(j));
+				deck.set(j, placeHolder);
+				//Collections.swap(deck, i, j);
+				i++;
 			}
 		}
-		Collections.swap(arr, i + 1, high);
+		Card pH = deck.get(i - 1);
+
+		deck.set(i - 1, deck.get(high - 1));
+		deck.set(high - 1, pH);
+		//Collections.swap(deck,i + 1, high);
+
 		return (i + 1);
 	}
 
     /**
      * provides range for sorting
      */
-	public void reset(Card[] arr, int low, int high) {
+	public void reset(int low, int high) {
 		if (low < high) {
             /* pi is partitioning index, arr[pi] is now
                at right place */
-			int pi = partition(arr, low, high);
-			reset(arr, low, pi - 1);  // Before pi
-			reset(arr, pi + 1, high); // After pi
+			int pi = partition(low, high);
+			reset(low, pi - 2);  // Before pi
+			reset(pi + 1, high); // After pi
+		}
+	}
+
+	public void printDeck() {
+		for(Card i: deck) {
+			System.out.println(i);
 		}
 	}
 }

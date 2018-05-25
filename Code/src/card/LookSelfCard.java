@@ -3,8 +3,6 @@ package card;
 import game.Deck;
 import game.Player;
 
-import static game.Player.askBurn;
-
 public class LookSelfCard extends Card implements PowerBoiSingle {
 
     public LookSelfCard(int value, String name) {
@@ -26,7 +24,7 @@ public class LookSelfCard extends Card implements PowerBoiSingle {
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card is: " + this);
-            askBurn();
+            gameI.askBurn();
             System.out.println("You can look at one of you cards!");
             System.out.println("Which card do you want to look at?");
             System.out.println(player.playerHand);

@@ -1,14 +1,15 @@
 package card;
 
 import java.util.Scanner;
-import static game.Player.askBurn;
 import game.Deck;
+import game.Game;
 import game.Player;
 
 public abstract class Card {
     public static Scanner sc = new Scanner(System.in);
     public int value;
     public String name;
+    public Game gameI = new Game();
 
     /**
      * Constructor for cards
@@ -42,7 +43,7 @@ public abstract class Card {
         } else if (sc.nextLine().equalsIgnoreCase("n")) {
             Deck.burnedDeck.add(this);
             System.out.println("The card burned is: " + this);
-            askBurn();
+            gameI.askBurn();
         }
     }
 
@@ -52,9 +53,9 @@ public abstract class Card {
      * @return -1 if value is less, 0 if equal, 1 if more
      */
     public int compareTo(Card card) {
-        if (value > card.getValue()) {
+        if (value > card.getVal()) {
             return 1;
-        } else if (value < card.getValue()){
+        } else if (value < card.getVal()){
             return -1;
         } else {
             return 0;
@@ -71,6 +72,6 @@ public abstract class Card {
     }
 
     public String toString() {
-        return "Card is: " + name + "\nValue: " + value;
+        return "Card is: " + name + "; Value: " + value;
     }
 }
