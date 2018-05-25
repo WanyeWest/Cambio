@@ -1,9 +1,6 @@
 package game;
 
 public class SortFun {
-
-
-
     public static void main(String[] args) {
         Deck sortFun = new Deck(Deck.cards);
         sortFun.printDeck();

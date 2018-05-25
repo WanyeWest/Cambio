@@ -111,7 +111,8 @@ public class Deck {
 
 
     /**
-     * returns pivot for sorting
+     * QUICKSORT
+     * returns the amount of cards sorted. method sorts cards from lowest to highest
      */
 	public int partition (int low, int high) {
 		// pivot (Element to be placed at right position)
@@ -141,7 +142,7 @@ public class Deck {
 	}
 
     /**
-     * provides range for sorting
+     * provides range for sorting and uses partition
      */
 	public void reset(int low, int high) {
 		if (low < high) {
